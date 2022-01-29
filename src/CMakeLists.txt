@@ -13,7 +13,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 #########################
 find_package( ITK REQUIRED )  
 include( ${ITK_USE_FILE}) 
-#find_package( VTK REQUIRED )  
+find_package( VTK REQUIRED )  
 #include( ${VTK_USE_FILE} )
 #find_package(OpenCV REQUIRED)
 #include_directories(${OpenCV_INCLUDE_DIRS})
