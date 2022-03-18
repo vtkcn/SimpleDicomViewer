@@ -9,7 +9,8 @@ class SimpleDicomViewer : public QMainWindow
 
 public:
     SimpleDicomViewer(QWidget *parent = Q_NULLPTR);
-
+public slots:
+    void on_OpenDicoms();
 private:
     Ui::SimpleDicomViewerClass ui;
 };
