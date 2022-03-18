@@ -3,6 +3,7 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_SimpleDicomViewer.h"
 #include "sdvInclude.h"
+
 class SimpleDicomViewer : public QMainWindow
 {
     Q_OBJECT
@@ -12,5 +13,6 @@ public:
 public slots:
     void on_OpenDicoms();
 private:
+    QWidget* m_wid;
     Ui::SimpleDicomViewerClass ui;
 };

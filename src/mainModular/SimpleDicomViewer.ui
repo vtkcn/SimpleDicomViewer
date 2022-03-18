@@ -6,12 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>952</width>
-    <height>747</height>
+    <width>987</width>
+    <height>875</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>SimpleDicomViewer</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -29,8 +32,8 @@
         <height>16777215</height>
        </size>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
         <widget class="QGroupBox" name="groupBox">
          <property name="minimumSize">
           <size>
@@ -59,7 +62,7 @@
          </widget>
         </widget>
        </item>
-       <item>
+       <item row="1" column="0">
         <widget class="QTreeWidget" name="treeWidget">
          <column>
           <property name="text">
@@ -81,7 +84,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>952</width>
+     <width>987</width>
      <height>23</height>
     </rect>
    </property>

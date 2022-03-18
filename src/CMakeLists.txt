@@ -33,11 +33,13 @@ include_directories(${PROJECT_SOURCE_DIR}
 ###########
 set(PROJECT_HDRS
 mainModular/SimpleDicomViewer.h
+mainModular/FourViews.h
 mainModular/sdvInclude.h
 )
 
 set(PROJECT_SRCS 
 mainModular/main.cpp
+mainModular/FourViews.cpp
 mainModular/SimpleDicomViewer.cpp
 )
 
