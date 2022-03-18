@@ -24,6 +24,7 @@ include_directories(${PROJECT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}  
 					${VTK_USE_FILE}
 					${ITK_USE_FILE}
+					${INCLUDE_DIRS}
                     #${OpenCV_LIBRARY_DIRS}
 					) 
 					

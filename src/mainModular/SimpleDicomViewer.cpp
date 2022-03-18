@@ -11,6 +11,28 @@ SimpleDicomViewer::SimpleDicomViewer(QWidget *parent)
     connect(ui.pushButton, SIGNAL(clicked()), this, SLOT(on_OpenDicoms()));
 }
 
+void SimpleDicomViewer::getAllFileName(QString path, std::vector<std::string>& path_vec)
+{
+    QDir* dir = new QDir(path);
+    QStringList filter;
+    QList<QFileInfo>* fileInfo = new QList<QFileInfo>(dir->entryInfoList(filter));
+    for (int i = 0; i < fileInfo->count(); ++i)
+    {
+        const QFileInfo info_tmp = fileInfo->at(i);
+        QString path_tmp = info_tmp.filePath();
+        if (info_tmp.fileName() == ".." || info_tmp.fileName() == ".")
+        {
+        }
+        else if (info_tmp.isFile()) {
+            path_vec.push_back(path_tmp.toStdString());
+        }
+        else if (info_tmp.isDir()) {
+            getAllFileName(path_tmp, path_vec);
+        }
+    }
+}
+
+
 void SimpleDicomViewer::on_OpenDicoms()
 {
     QString srcDirPath = QFileDialog::getExistingDirectory(
@@ -21,14 +43,13 @@ void SimpleDicomViewer::on_OpenDicoms()
     {
         return;
     }
-    else
-    {
-        qDebug() << "srcDirPath=" << srcDirPath;
-        srcDirPath += "/";
-    }
+
+    std::vector<std::string> path_vec;
+    getAllFileName(srcDirPath, path_vec);
 
     /***************解析Dicom文件序列****************/
-
+    dicomParse parse;
+    parse.setInputFile(path_vec);
     /**********************end************************/
 
     /*********************QTreeList***********************/
