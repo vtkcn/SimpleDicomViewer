@@ -5,25 +5,29 @@ cmake_minimum_required( VERSION 3.18 )
 ###########
 SET(PROJECT_NAME SimpleDicomViewer)
 project(${PROJECT_NAME})  
-set(CMAKE_INCLUDE_CURRENT_DIR ON)  
 
+set(CMAKE_INCLUDE_CURRENT_DIR ON)  
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
 
 #########################
 # External Dependencies #
 #########################
-find_package( ITK REQUIRED )  
-include( ${ITK_USE_FILE}) 
+#find_package( ITK REQUIRED )  
+#include( ${ITK_USE_FILE}) 
 find_package( VTK REQUIRED )  
 #include( ${VTK_USE_FILE} )
 #find_package(OpenCV REQUIRED)
 #include_directories(${OpenCV_INCLUDE_DIRS})
 
 find_package(Qt5 REQUIRED QUIET COMPONENTS Core Widgets OpenGL)
-find_package(Qt5Widgets)  
+#find_package(Qt5Widgets)  
 include_directories(${PROJECT_SOURCE_DIR}  
                     ${CMAKE_CURRENT_BINARY_DIR}  
 					${VTK_DIR}
-					${ITK_DIR}
+					#${ITK_DIR}
                     #${OpenCV_LIBRARY_DIRS}
 					) 
 					
@@ -31,39 +35,20 @@ include_directories(${PROJECT_SOURCE_DIR}
 ###########
 # Targets #
 ###########
-set(PROJECT_HDRS
-SimpleDicomViewer.h
-sdvInclude.h
-)
 
-set(PROJECT_SRCS 
-main.cpp
-SimpleDicomViewer.cpp
-)
+FILE(GLOB SRC_FILES "./*.cpp")
+FILE(GLOB HEAD_FILES "./*.h")
+FILE(GLOB UI_FILES "./*.ui")
+qt5_wrap_ui(WRAP_FILES ${UI_FILES})
+set(RCC_FILES SimpleDicomViewer.qrc)
+source_group("Ui" FILES ${UI_FILES} ${WRAP_FILES} )
 
-file(GLOB PROJECT_UIS "*.ui")
-QT5_WRAP_UI(PROJECT_UIS_H ${PROJECT_UIS})
-
-set(PROJECT_MOC_HDRS
-SimpleDicomViewer.h
-)
-QT5_WRAP_CPP(PROJECT_MOC_SRCS ${PROJECT_MOC_HDRS})
-
-set(RESOURCE_FILE SimpleDicomViewer.qrc)
-QT5_ADD_RESOURCES(RESOURCE ${RESOURCE_FILE})
-
-ADD_EXECUTABLE(${PROJECT_NAME}
-	${PROJECT_HDRS}
-	${PROJECT_SRCS}
-	${PROJECT_UIS_H}
-	${PROJECT_MOC_SRCS}
-	${RESOURCE}
-)
+add_executable(${PROJECT_NAME} ${SRC_FILES} ${HEAD_FILES} ${RCC_FILES} ${WRAP_FILES})
 
 TARGET_LINK_LIBRARIES ( 
     ${PROJECT_NAME}
     ${VTK_LIBRARIES}
-    ${ITK_LIBRARIES}
+    #${ITK_LIBRARIES}
     #${OpenCV_LIBS}
 	Qt5::Widgets  
 	Qt5::Core
